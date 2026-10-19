@@ -12,7 +12,7 @@ EPOCH=1792368000
 
 
 def source_files(root=ROOT):
-    files=list(root.glob('*.py'))+list(root.glob('*.md'))+[root/'README.txt',root/'LICENSE',root/'peek.qml',root/'system_prompt.txt']
+    files=list(root.glob('*.py'))+list(root.glob('*.md'))+[root/'docs/history/README-v0.9.1.txt',root/'LICENSE',root/'peek.qml',root/'system_prompt.txt']
     files += list((root/'tests').glob('*.py'))
     files += list((root/'tests/fixtures').glob('*.py'))
     files += [root/'assets/hya.svg',root/'packaging/hya',root/'packaging/io.hyalos.Hya.desktop',
