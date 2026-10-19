@@ -21,16 +21,20 @@ as official Hya or HyalOS releases.
 
 ## Original Character Artwork
 
-Original Hya character illustrations, animations,
-and other separately identified visual artwork are
-not licensed under GPL-3.0-or-later.
+Separately identified original Hya artwork may be
+distributed under terms different from the source-code
+license.
 
 The following original artwork is specifically reserved:
 
 - `assets/hya.svg` — Hya application icon and character artwork.
 
-All rights are reserved unless a separate license
-or permission explicitly applies.
+All rights are reserved for this separately identified
+artwork unless a separate license or permission applies.
+
+This reservation does not restrict the GPL permissions
+granted for Hya's source code, including code that draws
+or animates the Hya character.
 
 ## Third-Party Materials
 

@@ -130,7 +130,7 @@ Remaining desktop checks:
 
 ## Installation
 
-The tested staging build was applied to `/home/chandler/Downloads/Hya` after
+The tested staging build was applied to `~/Downloads/Hya` after
 reopening that directory as the writable workspace. All staged source files
 were checked for completeness, the original live files matched the v0.6 staged
 baseline, and all 76 tests passed before applying the 12 changed/new files.
