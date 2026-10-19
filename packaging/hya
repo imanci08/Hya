@@ -1,0 +1,27 @@
+#!/usr/bin/python
+"""Installed entry point: independent of cwd and development data."""
+import os
+from pathlib import Path
+import runpy
+import sys
+
+os.umask(0o077)
+root=Path(__file__).resolve().parents[1]/'lib'/'hya'
+sys.path.insert(0,str(root))
+from runtime_paths import set_profile
+set_profile('installed')
+if '--import-development' in sys.argv:
+    if sys.argv[1:]!=['--import-development','--yes']:
+        sys.exit('Explicit import: hya --import-development --yes\nCopies development settings/history into an empty installed profile; never overwrites existing files. Close installed Hya first.')
+    from single_instance import SingleInstance
+    from PySide6.QtCore import QCoreApplication
+    app=QCoreApplication(['hya-import'])
+    lock=SingleInstance()
+    if not lock.acquire():sys.exit('Installed Hya is running. Close it before importing.')
+    try:
+        from migration import import_development
+        for path in import_development():print('Imported:',path)
+    except Exception as error:sys.exit(str(error))
+    finally:lock.shutdown()
+else:
+    runpy.run_module('hya',run_name='__main__')

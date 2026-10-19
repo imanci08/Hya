@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Hya
+GenericName=Desktop Companion
+Comment=An animated orb companion with optional local AI
+Exec=hya
+TryExec=hya
+Icon=hya
+Terminal=false
+Categories=Utility;
+Keywords=companion;orb;local;AI;Ollama;
+StartupNotify=false
+StartupWMClass=Hya

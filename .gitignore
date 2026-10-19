@@ -1,0 +1,43 @@
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Development backups
+backups/
+*.bak
+*.backup
+*.before-*
+*.v*-backup
+
+# Generated packages
+dist/
+*.pkg.tar.*
+*.tar.gz
+*.tar.zst
+
+# Build artifacts
+build/
+*.egg-info/
+*.so
+*.o
+*.a
+
+# Temporary previews
+previews/
+
+# Editor and system files
+.vscode/
+.idea/
+.DS_Store
+*~
+
+# Local configuration and secrets
+.env
+.env.*
+*.key
+*.pem

@@ -1,0 +1,44 @@
+pkgname=hya
+pkgver=0.9.2
+pkgrel=1
+pkgdesc='Animated orb desktop companion with optional local Ollama AI'
+arch=('x86_64' 'aarch64')
+license=('GPL-3.0-or-later' 'LicenseRef-Hya-Artwork')
+depends=('python' 'pyside6' 'shiboken6' 'qt6-base' 'qt6-declarative' 'qt6-svg' 'layer-shell-qt' 'glib2' 'kwindowsystem')
+makedepends=('desktop-file-utils' 'cmake')
+optdepends=('ollama: optional local conversational AI'
+            'konsole: guided native setup prompts (or xterm)'
+            'xterm: alternative guided native setup terminal'
+            'sudo: normal authorization for explicitly approved native setup')
+source=("hya-$pkgver.tar.gz")
+sha256sums=('@SOURCE_SHA256@')
+options=('!debug' '!strip')
+
+build() {
+    cmake -S "$srcdir/hya-$pkgver/native" -B "$srcdir/effects-build" -DCMAKE_BUILD_TYPE=Release
+    cmake --build "$srcdir/effects-build"
+}
+
+check() {
+    cd "$srcdir/hya-$pkgver"
+    desktop-file-validate packaging/io.hyalos.Hya.desktop
+    QT_QPA_PLATFORM=offscreen XDG_CONFIG_HOME="$srcdir/test-config" XDG_DATA_HOME="$srcdir/test-data" \
+        python -m unittest discover -s tests
+}
+
+package() {
+    cd "$srcdir/hya-$pkgver"
+    install -d "$pkgdir/usr/lib/hya/assets"
+    install -m644 ./*.py "$pkgdir/usr/lib/hya/"
+    install -m644 peek.qml system_prompt.txt "$pkgdir/usr/lib/hya/"
+    install -Dm755 "$srcdir/effects-build/libhya-effects.so" "$pkgdir/usr/lib/hya/native/libhya-effects.so"
+    install -m644 assets/hya.svg "$pkgdir/usr/lib/hya/assets/"
+    install -Dm755 packaging/hya "$pkgdir/usr/bin/hya"
+    install -Dm644 packaging/io.hyalos.Hya.desktop "$pkgdir/usr/share/applications/io.hyalos.Hya.desktop"
+    install -Dm644 assets/hya.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/hya.svg"
+    install -Dm644 packaging/LICENSE.notice "$pkgdir/usr/share/licenses/hya/LICENSE.notice"
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/hya/LICENSE"
+    install -Dm644 BRANDING.md "$pkgdir/usr/share/licenses/hya/BRANDING.md"
+    install -d "$pkgdir/usr/share/doc/hya"
+    install -m644 README.txt STANDALONE.md AI_SETUP.md RELEASE_0.9.2.md "$pkgdir/usr/share/doc/hya/"
+}

@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.16)
+project(hya_effects LANGUAGES CXX)
+find_package(Qt6 REQUIRED COMPONENTS Gui)
+find_package(KF6WindowSystem REQUIRED)
+add_library(hya-effects SHARED effects.cpp)
+target_link_libraries(hya-effects PRIVATE Qt6::Gui KF6::WindowSystem)
+set_target_properties(hya-effects PROPERTIES CXX_STANDARD 17)
